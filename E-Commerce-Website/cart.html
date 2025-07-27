@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Shopping Cart</title>
+        <link rel="icon" type="image/x-icon" href="images/homepage/websiteicon.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f3f4f6;
+            color: #374151;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            box-sizing: border-box;
+            background-image: url("images/homepage/bg1.png");
+            background-repeat: repeat;
+        }
+        * {
+            border-radius: 0.5rem;
+        }
+        .main-content {
+            flex-grow: 1;
+            width: 100%;
+            max-width: 960px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 1.5rem;
+            box-sizing: border-box;
+        }
+        .page-title {
+            font-size: 2.25rem;
+            font-weight: 800;
+            color: #d33939;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .cart-items-section {
+            background-color: #ffffff;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .cart-items-header {
+            display: none;
+            grid-template-columns: 2fr 1fr 1fr 1fr 0.5fr;
+            gap: 1rem;
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+            font-weight: 600;
+            color: #4b5563;
+        }
+        .cart-item {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            align-items: center;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            margin-bottom: 1em;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            border-bottom: 1px solid #f3f4f6;
+            background-color: #fffadb80;
+        }
+        .cart-item:last-child {
+            border-bottom: 0;
+        }
+        .cart-item-product-info {
+            display: flex;
+            align-items: center;
+            grid-column: span 1 / span 1;
+        }
+        .cart-item-image {
+            width: 5rem;
+            height: 5rem;
+            object-fit: cover;
+            border-radius: 0.375rem;
+            margin-right: 1rem;
+        }
+        .cart-item-title {
+            font-weight: 600;
+            font-size: 1.125rem;
+            color: #111827;
+        }
+        .cart-item-details {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+        .cart-item-price {
+            color: #374151;
+            font-weight: 500;
+        }
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+        }
+        .quantity-btn {
+            background-color: #e5e7eb;
+            color: #374151;
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.375rem;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        .quantity-btn:hover {
+            background-color: #d1d5db;
+        }
+        .quantity-input {
+            width: 4rem;
+            text-align: center;
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+            margin-left: 0.5rem;
+            margin-right: 0.5rem;
+            padding-top: 0.25rem;
+            padding-bottom: 0.25rem;
+        }
+        .subtotal-display {
+            color: #111827;
+            font-weight: bold;
+            text-align: left;
+        }
+        .remove-item-btn {
+            color: #ef4444;
+            border: none;
+            background: none;
+            cursor: pointer;
+            transition: color 0.2s ease;
+            padding: 0.5rem;
+            border-radius: 9999px;
+        }
+        .remove-item-btn:hover {
+            color: #b91c1c;
+        }
+        .empty-cart-message {
+            text-align: center;
+            color: #6b7280;
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+            font-size: 1.125rem;
+            display: none;
+        }
+        .cart-summary {
+            background-color: #ffffff;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+        }
+        .cart-summary-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #111827;
+            margin-bottom: 1rem;
+        }
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .summary-label {
+            color: #4b5563;
+        }
+        .summary-value {
+            font-weight: 600;
+            color: #111827;
+        }
+        .summary-total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-top: 1px solid #e5e7eb;
+            padding-top: 1rem;
+        }
+        .summary-total-label {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #111827;
+        }
+        .summary-total-value {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #2563eb;
+        }
+        .checkout-button-container {
+            display: flex;
+            justify-content: flex-end;
+        }
+        .checkout-button {
+            background-color: #eb5d25;
+            color: #ffffff;
+            padding: 0.75rem 2rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            font-size: 1.125rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        .checkout-button:hover {
+            background-color: #d8581d;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .payment-area {
+            background-color: #ffffff;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+        .payment-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #111827;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .payment-form .form-group {
+            margin-bottom: 1rem;
+        }
+        .payment-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #4b5563;
+        }
+        .payment-form input[type="text"], .payment-form input[type="password"] {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+            font-size: 1rem;
+            color: #374151;
+            box-sizing: border-box;
+        }
+        .payment-form input[type="text"]:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        }
+        .payment-form .form-row {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .payment-form .form-row .form-group {
+            flex: 1;
+            margin-bottom: 0;
+        }
+        .payment-form .checkout-button {
+            width: 100%;
+            margin-top: 1rem;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 2.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 450px;
+            text-align: center;
+            position: relative;
+            animation: fadeIn 0.3s ease-out;
+        }
+        .close-button {
+            color: #aaa;
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .close-button:hover,
+        .close-button:focus {
+            color: #333;
+            text-decoration: none;
+        }
+        .modal-icon {
+            font-size: 4rem;
+            color: #10b981;
+            margin-bottom: 1rem;
+        }
+        .modal h2 {
+            font-size: 2rem;
+            color: #111827;
+            margin-bottom: 1rem;
+        }
+        .modal p {
+            font-size: 1rem;
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+        }
+        .modal .checkout-button {
+            display: inline-block;
+            margin-top: 1rem;
+            text-decoration: none;
+        }
+        .hidden {
+            display: none;
+        }
+        .error-message {
+            color: #ef4444;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @media (min-width: 768px) {
+            .cart-item {
+                grid-template-columns: 2fr 1fr 1fr 1fr 0.5fr;
+            }
+            .cart-item-product-info {
+                grid-column: span 2 / span 2;
+            }
+            .cart-items-header {
+                display: grid;
+            }
+            .subtotal-display {
+                text-align: right;
+            }
+        }
+        footer {
+    height: 10em;
+    width: 100%;
+    background-color: #b40000;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 1em 0;
+}
+.footer-section-1, .footer-section-2, .footer-section-3 {
+    height: 5em;
+    width: 25%;
+    min-width: 200px;
+    padding: 0em;
+}
+.footer-section-1 {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+}
+.phone-area, .email-area, .location-area {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0em;
+    color: white;
+    margin-bottom: 0em;
+}
+.footer-section-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.profiles {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2em;
+}
+.profile-icons {
+    font-size: 2em;
+    transition: transform 0.2s ease;
+}
+.profile-icons:hover {
+    transform: scale(1.1);
+    color: #f1f1f1;
+}
+.footer-section-3 {
+}
+@media (max-width:765px) {
+    footer {
+            flex-direction: column;
+            height: auto;
+            padding: 1em 0;
+        }
+        .footer-section-1, .footer-section-2, .footer-section-3 {
+            width: 90%;
+            min-width: unset;
+            margin-top: 1em;
+            margin-bottom: 1em;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .phone-area, .email-area, .location-area {
+            justify-content: center;
+        }
+    .profiles {
+        justify-content: center;
+    }
+}
+a, a.visited{
+    text-decoration: none;
+    color: #ffffff;
+}
+.back-button{
+    font-size: 1.3em;
+    padding-left: 5%;
+    position:  absolute;
+    font-weight: bold;
+}
+header {
+    width: 100%;
+    height: 4em;
+    background-color: #FF0000;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    position: sticky;
+    top: 0px;
+    z-index: 50;
+}
+</style>
+</head>
+<body class="flex flex-col min-h-screen">
+    <header>
+        <div class="back-button"><a href="homepage.html" target="_self"><p><i class="fa-solid fa-arrow-left" style="color: #ffffff;"></i> Back To Home</p></a></div>
+    </header>
+    <main class="main-content">
+        <h1 class="page-title">Your Shopping Cart</h1>
+        <div id="cart-items-container" class="cart-items-section">
+            <div class="cart-items-header">
+                <div style="grid-column: span 2;">Product</div>
+                <div>Price</div>
+                <div>Quantity</div>
+                <div style="text-align: right;">Subtotal</div>
+                <div></div>
+            </div>
+            <div id="empty-cart-message" class="empty-cart-message">
+                Your cart is empty. Start shopping!
+            </div>
+        </div>
+        <div class="checkout-button-container mb-8">
+            <button id="add-sample-product-btn" class="checkout-button" style="background-color: #10b981;">
+                <i class="fas fa-plus-circle mr-2"></i> Add Sample Product to Cart
+            </button>
+        </div>
+        <div class="cart-summary">
+            <h2 class="cart-summary-title">Order Summary</h2>
+            <div class="summary-row">
+                <span class="summary-label">Subtotal:</span>
+                <span id="cart-subtotal" class="summary-value">$0.00</span>
+            </div>
+            <div class="summary-row">
+                <span class="summary-label">Shipping:</span>
+                <span id="cart-shipping" class="summary-value">$0.00</span>
+            </div>
+            <div class="summary-total-row">
+                <span class="summary-total-label">Total:</span>
+                <span id="cart-total" class="summary-total-value">$0.00</span>
+            </div>
+            <div class="checkout-button-container">
+                <button id="proceed-to-checkout-btn" class="checkout-button">
+                    Proceed to Checkout <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+        </div>
+        <div id="payment-area" class="payment-area hidden">
+            <h2 class="payment-title">Payment Information</h2>
+            <form id="payment-form" class="payment-form">
+                <div class="form-group">
+                    <label for="card-number">Card Number</label>
+                    <input type="text" id="card-number" placeholder="XXXX XXXX XXXX XXXX" maxlength="19" required>
+                    <p id="card-number-error" class="error-message hidden">Card number must be 16 digits.</p>
+                </div>
+                <div class="form-group">
+                    <label for="card-name">Cardholder Name</label>
+                    <input type="text" id="card-name" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="expiry-date">Expiry Date</label>
+                        <input type="text" id="expiry-date" placeholder="MM/YY" maxlength="5" required>
+                        <p id="expiry-date-error" class="error-message hidden">Invalid expiry date.</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="cvv">CVV</label>
+                        <input type="password" id="cvv" placeholder="123" maxlength="3" required>
+                        <p id="cvv-error" class="error-message hidden">CVV must be 3 digits.</p>
+                    </div>
+                </div>
+                <button type="submit" id="pay-now-btn" class="checkout-button">Pay Now</button>
+            </form>
+        </div>
+    </main>
+    <div id="payment-confirmed-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <i class="fas fa-check-circle modal-icon"></i>
+            <h2>Payment Confirmed!</h2>
+            <p>Thank you for your purchase. Your order has been successfully placed.</p>
+            <button id="view-orders-btn" class="checkout-button">Close and Continue</button>
+        </div>
+    </div>
+    <footer>
+        <div class="footer-section-1">
+            <div class="phone-area">
+                <div class="phone-logo"><i class="fa-solid fa-phone" style="color: white;"></i></div>
+                <div class="phone-no"><p>- (+91) 999-000-1111</p></div>
+            </div>
+            <div class="email-area">
+                <div class="email-logo"><i class="fa-solid fa-envelope" style="color: white;"></i></div>
+                <div class="email"><p>- shalinidey87@gmail.com</p></div>
+            </div>
+            <div class="location-area">
+                <div class="location-logo"><i class="fa-solid fa-location-dot" style="color: white;"></i></div>
+                <div class="location"><p>- ABC Area, Kolkata, West Bengal - 700088</p></div>
+            </div>
+        </div>
+        <div class="footer-section-2">
+            <div class="profiles">
+                <i class="fa-brands fa-instagram profile-icons" style="color: white"></i>
+                <i class="fa-brands fa-facebook-f profile-icons" style="color: white"></i>
+                <i class="fa-brands fa-youtube profile-icons" style="color: white"></i>
+                <i class="fa-brands fa-snapchat profile-icons" style="color: white"></i>
+            </div>
+        </div>
+        <div class="footer-section-3">
+        </div>
+    </footer>
+</body>    <script>
+        let cart = [];
+
+        const products = [
+            {
+                "id": "na-item-1", "name": "Kolhapuri Leather Footwear", "price": "₹1599", "mrp": null, "discount": null, "score": "4.3", "reviews": "245 Reviews", "image": "images/homepage/kolhapuri.webp", "section": "new-arrivals", "category": "footwears", "type": "Kolhapuri Chappal", "state": "Maharashtra", "religion": null, "description": "Step out in style with these authentic Kolhapuri Leather Footwear, handcrafted by skilled artisans. Made from genuine leather, they offer both comfort and a touch of traditional elegance. Perfect for casual wear or ethnic ensembles.", "reviewsData": []
+            },
+            {
+                "id": "na-item-2", "name": "Bengali Tant Saree", "price": "₹1399", "mrp": null, "discount": null, "score": "4.5", "reviews": "188 Reviews", "image": "images/homepage/tantsaree.jpg_large", "section": "new-arrivals", "category": "sarees", "type": "Tant", "state": "West Bengal", "religion": null, "description": "Experience the grace of Bengal with this lightweight and comfortable Tant Saree. Woven with fine cotton, it features delicate motifs and a traditional border, ideal for everyday wear and festive occasions.", "reviewsData": []
+            },
+            {
+                "id": "na-item-3", "name": "South Indian Golden Saree", "price": "₹2199", "mrp": null, "discount": null, "score": "4.6", "reviews": "312 Reviews", "image": "images/homepage/southsaree.avif", "section": "new-arrivals", "category": "sarees", "type": "South Indian", "state": "Karnataka", "religion": "Hinduism", "description": "Adorn yourself in the splendor of a South Indian Golden Saree. This exquisite piece boasts rich golden zari work and intricate patterns, making it a perfect choice for weddings, grand celebrations, and cultural events.", "reviewsData": []
+            },
+            {
+                "id": "na-item-4", "name": "Floral Printed Burkha", "price": "₹1699", "mrp": null, "discount": null, "score": "4.2", "reviews": "95 Reviews", "image": "images/homepage/burkha.webp", "section": "new-arrivals", "category": "apparel", "type": "Burkha", "state": null, "religion": "Islam", "description": "Embrace modesty with a touch of contemporary style with this beautiful Floral Printed Burkha. Designed for comfort and elegance, it features a flowy silhouette and vibrant floral patterns.", "reviewsData": []
+            },
+            {
+                "id": "tp-item-1", "name": "Punjabi Salwar Suit", "price": "₹1249", "mrp": null, "discount": null, "score": "4.4", "reviews": "210 Reviews", "image": "images/homepage/salwar.jpg", "section": "top-picks", "category": "kurtis", "type": "Punjabi Suit", "state": "Punjab", "religion": "Sikhism", "description": "Look effortlessly chic in this traditional Punjabi Salwar Suit. Featuring intricate embroidery and a comfortable fit, it's perfect for casual outings, family gatherings, and festivals.", "reviewsData": []
+            },
+            {
+                "id": "tp-item-2", "name": "Multicoloured Leggings Set", "price": "₹649", "mrp": null, "discount": null, "score": "4.1", "reviews": "3298 Reviews", "image": "images/homepage/leggings.jpg", "section": "top-picks", "category": "apparel", "type": "Leggings", "state": null, "religion": null, "description": "Comfort meets versatility with this Multicoloured Leggings Set. Made from breathable fabric, these leggings are perfect for pairing with kurtis, tunics, or dresses, offering endless styling possibilities.", "reviewsData": []
+            },
+            {
+                "id": "tp-item-3", "name": "Lucknowi Chikankari Saree", "price": "₹2399", "mrp": null, "discount": null, "score": "4.7", "reviews": "250 Reviews", "image": "images/homepage/chikankari.jpg", "section": "top-picks", "category": "sarees", "type": "Chikankari", "state": "Uttar Pradesh", "religion": null, "description": "Indulge in the timeless elegance of a Lucknowi Chikankari Saree. Hand-embroidered with delicate white thread work, this saree is a masterpiece of traditional craftsmanship, ideal for special occasions.", "reviewsData": []
+            },
+            {
+                "id": "tp-item-4", "name": "Mysore Silk Saree", "price": "₹2499", "mrp": null, "discount": null, "score": "4.8", "reviews": "330 Reviews", "image": "images/homepage/mysoresilk.jpg", "section": "top-picks", "category": "sarees", "type": "Mysore", "state": "Karnataka", "religion": null, "description": "Drape yourself in luxury with a genuine Mysore Silk Saree. Known for its lustrous texture and vibrant colors, this saree features exquisite golden borders, perfect for grand celebrations and weddings.", "reviewsData": []
+            },
+            {
+                "id": "sale-item-1", "name": "Kashmiri Woollen Pheran", "price": "₹1499", "mrp": "₹1899", "discount": "21% OFF", "score": "4.5", "reviews": "403 Reviews", "image": "images/homepage/pheran.jpg", "section": "sale", "category": "apparel", "type": "Pheran", "state": "Jammu & Kashmir", "religion": null, "description": "Stay warm and stylish with this authentic Kashmiri Woollen Pheran. This traditional loose gown is adorned with beautiful embroidery, offering comfort and elegance during colder months.", "reviewsData": []
+            },
+            {
+                "id": "sale-item-2", "name": "Assamese Mekhela Chador", "price": "₹1699", "mrp": "₹2099", "discount": "19% OFF", "score": "4.4", "reviews": "160 Reviews", "image": "images/homepage/mekhelachador.jpg", "section": "sale", "category": "sarees", "type": "Mekhela Chador", "state": "Assam", "religion": null, "description": "Embrace the unique charm of Assam with this traditional Mekhela Chador. Handwoven with intricate patterns, this two-piece saree-like garment is perfect for cultural events and festive occasions.", "reviewsData": []
+            },
+            {
+                "id": "sale-item-3", "name": "Punjabi Traditional Jutti", "price": "₹899", "mrp": "₹1099", "discount": "18% OFF", "score": "4.3", "reviews": "190 Reviews", "image": "images/homepage/jutti.webp", "section": "sale", "category": "footwears", "type": "Jutti/Mojari", "state": "Punjab", "religion": "Sikhism", "description": "Complete your ethnic look with these handcrafted Punjabi Traditional Jutti. Featuring vibrant embroidery and comfortable fit, these slip-on shoes add a touch of traditional flair to any outfit.", "reviewsData": []
+            },
+            {
+                "id": "saree-banarasi-1", "name": "Elegant Banarasi Saree", "price": "₹4500", "mrp": null, "discount": null, "score": "4.9", "reviews": "500 Reviews", "image": "images/homepage/banarasi.webp", "section": "sarees", "category": "sarees", "type": "Banarasi", "state": "Uttar Pradesh", "religion": "Hinduism", "description": "Luxurious Banarasi Saree with intricate zari work, perfect for weddings and grand celebrations.", "reviewsData": []
+            },
+            {
+                "id": "kurti-anarkali-1", "name": "Anarkali Kurti with Embroidery", "price": "₹1800", "mrp": "₹2200", "discount": "18% OFF", "score": "4.6", "reviews": "120 Reviews", "image": "images/homepage/anarkali.jpg", "section": "kurtis", "category": "kurtis", "type": "Anarkali", "state": "Rajasthan", "religion": null, "description": "Flowy Anarkali kurti featuring exquisite embroidery, ideal for festive occasions.", "reviewsData": []
+            },
+            {
+                "id": "footwear-khussa-1", "name": "Traditional Khussa Shoes", "price": "₹950", "mrp": null, "discount": null, "score": "4.2", "reviews": "80 Reviews", "image": "images/homepage/khussa.webp", "section": "footwears", "category": "footwears", "type": "Khussa", "state": "Punjab", "religion": "Sikhism", "description": "Handcrafted Khussa shoes with vibrant patterns, offering comfort and traditional style.", "reviewsData": []
+            },
+            {
+                "id": "saree-bandhani-1", "name": "Vibrant Bandhani Saree", "price": "₹1700", "mrp": null, "discount": null, "score": "4.5", "reviews": "150 Reviews", "image": "images/homepage/bandhani.webp", "section": "sarees", "category": "sarees", "type": "Bandhani", "state": "Gujarat", "religion": "Hinduism", "description": "Eye-catching Bandhani saree known for its unique tie-dye patterns and bright colors.", "reviewsData": []
+            },
+            {
+                "id": "kurti-straight-1", "name": "Classic Straight Cut Kurti", "price": "₹800", "mrp": "₹1000", "discount": "20% OFF", "score": "4.0", "reviews": "200 Reviews", "image": "images/homepage/straightkurti.webp", "section": "kurtis", "category": "kurtis", "type": "Straight Cut", "state": null, "religion": null, "description": "Simple yet elegant straight cut kurti, perfect for daily wear or office.", "reviewsData": []
+            },
+            {
+                "id": "footwear-paduka-1", "name": "Wooden Paduka Sandals", "price": "₹600", "mrp": null, "discount": null, "score": "3.8", "reviews": "45 Reviews", "image": "images/homepage/paduka.jpg", "section": "footwears", "category": "footwears", "type": "Paduka", "state": null, "religion": "Hinduism", "description": "Traditional wooden Paduka sandals, reflecting ancient Indian footwear.", "reviewsData": []
+            },
+            {
+                "id": "saree-chanderi-1", "name": "Lightweight Chanderi Saree", "price": "₹2800", "mrp": null, "discount": null, "score": "4.7", "reviews": "90 Reviews", "image": "images/homepage/chanderi.webp", "section": "sarees", "category": "sarees", "type": "Chanderi", "state": "Madhya Pradesh", "religion": null, "description": "Graceful Chanderi saree known for its sheer texture and lightweight feel.", "reviewsData": []
+            },
+            {
+                "id": "kurti-aline-1", "name": "A-Line Cotton Kurti", "price": "₹950", "mrp": null, "discount": null, "score": "4.3", "reviews": "180 Reviews", "image": "images/homepage/alinekurti.webp", "section": "kurtis", "category": "kurtis", "type": "A-Line", "state": null, "religion": null, "description": "Comfortable A-Line cotton kurti, perfect for daily casual wear.", "reviewsData": []
+            },
+            {
+                "id": "saree-gujarati-1", "name": "Gujarati Patola Saree", "price": "₹5500", "mrp": null, "discount": null, "score": "4.9", "reviews": "110 Reviews", "image": "images/homepage/patola.jpeg", "section": "sarees", "category": "sarees", "type": "Patola", "state": "Gujarat", "religion": "Hinduism", "description": "Exquisite Patola silk saree, a symbol of Gujarati heritage and craftsmanship.", "reviewsData": []
+            },
+            {
+                "id": "kurti-angrakha-1", "name": "Angrakha Style Kurti", "price": "₹1400", "mrp": null, "discount": null, "score": "4.4", "reviews": "70 Reviews", "image": "images/homepage/angrakha.jpg", "section": "kurtis", "category": "kurtis", "type": "Angrakha", "state": "Rajasthan", "religion": null, "description": "Traditional Angrakha style kurti with a wrap-around design, unique and elegant.", "reviewsData": []
+            },
+            {
+                "id": "saree-odisha-1", "name": "Odisha Ikkat Saree", "price": "₹3200", "mrp": null, "discount": null, "score": "4.6", "reviews": "85 Reviews", "image": "images/homepage/ikkat.webp", "section": "sarees", "category": "sarees", "type": "Ikkat", "state": "Odisha", "religion": "Hinduism", "description": "Handwoven Ikkat saree from Odisha, known for its distinct dyeing technique.", "reviewsData": []
+            }
+        ];
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const cartItemsContainer = document.getElementById('cart-items-container');
+            const emptyCartMessage = document.getElementById('empty-cart-message');
+            const cartSubtotalDisplay = document.getElementById('cart-subtotal');
+            const cartShippingDisplay = document.getElementById('cart-shipping');
+            const cartTotalDisplay = document.getElementById('cart-total');
+            const cartItemCountDisplay = document.getElementById('cart-item-count'); 
+            const addSampleProductBtn = document.getElementById('add-sample-product-btn');
+            const proceedToCheckoutBtn = document.getElementById('proceed-to-checkout-btn'); 
+            const paymentArea = document.getElementById('payment-area');
+            const paymentForm = document.getElementById('payment-form');
+            const paymentConfirmedModal = document.getElementById('payment-confirmed-modal');
+            const closeModalButton = document.querySelector('#payment-confirmed-modal .close-button');
+            const viewOrdersBtn = document.getElementById('view-orders-btn');
+
+            const cardNumberInput = document.getElementById('card-number');
+            const cardNumberError = document.getElementById('card-number-error');
+            const expiryDateInput = document.getElementById('expiry-date');
+            const expiryDateError = document.getElementById('expiry-date-error');
+            const cvvInput = document.getElementById('cvv');
+            const cvvError = document.getElementById('cvv-error');
+
+
+            const SHIPPING_COST = 5.00;
+            window.addToCart = function(product) {
+                const existingItemIndex = cart.findIndex(item => item.id === product.id);
+
+                if (existingItemIndex > -1) {
+                    cart[existingItemIndex].quantity++;
+                } else {
+                    cart.push({
+                        id: product.id,
+                        name: product.name,
+                        price: product.price,
+                        image: product.image,
+                        quantity: 1
+                    });
+                }
+                console.log(`Product "${product.name}" added to in-memory cart!`);
+                renderCartItems();
+            }
+
+            function renderCartItems() {
+                Array.from(cartItemsContainer.children).forEach(child => {
+                    if (!child.classList.contains('cart-items-header') && child.id !== 'empty-cart-message') {
+                        child.remove();
+                    }
+                });
+
+                if (cart.length === 0) {
+                    emptyCartMessage.classList.remove('hidden');
+                    cartItemsContainer.querySelector('.cart-items-header').style.display = 'none';
+                    document.querySelector('.cart-summary').classList.add('hidden');
+                    proceedToCheckoutBtn.disabled = true; 
+                } else {
+                    emptyCartMessage.classList.add('hidden');
+                    document.querySelector('.cart-summary').classList.remove('hidden');
+                    proceedToCheckoutBtn.disabled = false; 
+
+                    if (window.innerWidth >= 768) {
+                        cartItemsContainer.querySelector('.cart-items-header').style.display = 'grid';
+                    } else {
+                        cartItemsContainer.querySelector('.cart-items-header').style.display = 'none';
+                    }
+
+                    cart.forEach(item => {
+                        const cartItemDiv = document.createElement('div');
+                        cartItemDiv.classList.add('cart-item');
+                        const itemPriceClean = parseFloat(item.price.replace(/[^0-9.]+/g, ""));
+                        cartItemDiv.dataset.productId = item.id;
+                        cartItemDiv.dataset.price = itemPriceClean.toFixed(2);
+
+                        cartItemDiv.innerHTML = `
+                            <div class="cart-item-product-info">
+                                <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                                <div>
+                                    <h3 class="cart-item-title">${item.name}</h3>
+                                </div>
+                            </div>
+                            <div class="cart-item-price">${item.price}</div>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn decrease">-</button>
+                                <input type="number" value="${item.quantity}" min="1" class="quantity-input" readonly>
+                                <button class="quantity-btn increase">+</button>
+                            </div>
+                            <div class="subtotal-display">₹${(itemPriceClean * item.quantity).toFixed(2)}</div>
+                            <div style="text-align: right;">
+                                <button class="remove-item-btn">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </div>
+                        `;
+                        cartItemsContainer.insertBefore(cartItemDiv, emptyCartMessage);
+                    });
+                }
+                updateCartTotals();
+            }
+
+            function updateCartTotals() {
+                let subtotal = 0;
+                let totalItemCount = 0;
+
+                cart = [];
+                const currentCartElements = document.querySelectorAll('.cart-item');
+
+                if (currentCartElements.length === 0) {
+                    emptyCartMessage.classList.remove('hidden');
+                    cartItemsContainer.querySelector('.cart-items-header').style.display = 'none';
+                    document.querySelector('.cart-summary').classList.add('hidden');
+                    proceedToCheckoutBtn.disabled = true;
+                } else {
+                    emptyCartMessage.classList.add('hidden');
+                    document.querySelector('.cart-summary').classList.remove('hidden');
+                    proceedToCheckoutBtn.disabled = false;
+
+                    if (window.innerWidth >= 768) {
+                        cartItemsContainer.querySelector('.cart-items-header').style.display = 'grid';
+                    } else {
+                        cartItemsContainer.querySelector('.cart-items-header').style.display = 'none';
+                    }
+                }
+
+                currentCartElements.forEach(itemElement => {
+                    const productId = itemElement.dataset.productId;
+                    const price = parseFloat(itemElement.dataset.price);
+                    const quantityInput = itemElement.querySelector('.quantity-input');
+                    const quantity = parseInt(quantityInput.value);
+
+                    const itemSubtotal = price * quantity;
+                    itemElement.querySelector('.subtotal-display').textContent = `₹${itemSubtotal.toFixed(2)}`;
+                    subtotal += itemSubtotal;
+                    totalItemCount += quantity;
+
+                    cart.push({
+                        id: productId,
+                        name: itemElement.querySelector('.cart-item-title').textContent,
+                        price: itemElement.querySelector('.cart-item-price').textContent,
+                        image: itemElement.querySelector('.cart-item-image').src,
+                        quantity: quantity
+                    });
+                });
+
+                const total = subtotal + SHIPPING_COST;
+
+                cartSubtotalDisplay.textContent = `₹${subtotal.toFixed(2)}`;
+                cartShippingDisplay.textContent = `₹${SHIPPING_COST.toFixed(2)}`;
+                cartTotalDisplay.textContent = `₹${total.toFixed(2)}`;
+                cartItemCountDisplay.textContent = totalItemCount;
+            }
+
+            cartItemsContainer.addEventListener('click', (event) => {
+                const target = event.target;
+
+                if (target.classList.contains('decrease')) {
+                    const quantityInput = target.nextElementSibling;
+                    let quantity = parseInt(quantityInput.value);
+                    if (quantity > 1) {
+                        quantity--;
+                        quantityInput.value = quantity;
+                        updateCartTotals();
+                    }
+                } else if (target.classList.contains('increase')) {
+                    const quantityInput = target.previousElementSibling;
+                    let quantity = parseInt(quantityInput.value);
+                    quantity++;
+                    quantityInput.value = quantity;
+                    updateCartTotals();
+                } else if (target.closest('.remove-item-btn')) {
+                    const itemToRemove = target.closest('.cart-item');
+                    if (itemToRemove) {
+                        itemToRemove.remove();
+                        updateCartTotals();
+                    }
+                }
+            });
+
+            addSampleProductBtn.addEventListener('click', () => {
+                const randomProduct = products[Math.floor(Math.random() * products.length)];
+                addToCart(randomProduct);
+            });
+
+            proceedToCheckoutBtn.addEventListener('click', () => {
+                document.querySelector('.cart-summary').classList.add('hidden');
+                cartItemsContainer.classList.add('hidden');
+                addSampleProductBtn.classList.add('hidden');
+                paymentArea.classList.remove('hidden');
+                window.scrollTo(0, 0);
+            });
+
+            cardNumberInput.addEventListener('input', (event) => {
+                let value = event.target.value.replace(/\D/g, '');
+                value = value.substring(0, 16);
+                let formattedValue = '';
+                for (let i = 0; i < value.length; i++) {
+                    if (i > 0 && i % 4 === 0) {
+                        formattedValue += ' ';
+                    }
+                    formattedValue += value[i];
+                }
+                event.target.value = formattedValue;
+
+                if (value.length !== 16) {
+                    cardNumberError.classList.remove('hidden');
+                } else {
+                    cardNumberError.classList.add('hidden');
+                }
+            });
+
+            expiryDateInput.addEventListener('input', (event) => {
+                let value = event.target.value.replace(/\D/g, '');
+                if (value.length > 2 && !value.includes('/')) {
+                    value = value.substring(0, 2) + '/' + value.substring(2);
+                }
+                value = value.substring(0, 5);
+                event.target.value = value;
+
+                validateExpiryDate();
+            });
+
+            expiryDateInput.addEventListener('blur', validateExpiryDate);
+
+            function validateExpiryDate() {
+                const value = expiryDateInput.value;
+                const parts = value.split('/');
+                let isValid = true;
+
+                if (parts.length === 2) {
+                    const month = parseInt(parts[0], 10);
+                    const year = parseInt(parts[1], 10);
+
+                    const currentYear = new Date().getFullYear() % 100;
+                    const currentMonth = new Date().getMonth() + 1;
+
+                    if (month < 1 || month > 12) {
+                        isValid = false;
+                    } else if (year < currentYear || (year === currentYear && month < currentMonth)) {
+                        isValid = false;
+                    } else if (year > currentYear + 15) {
+                        isValid = false;
+                    }
+                } else {
+                    isValid = false;
+                }
+
+                if (!isValid) {
+                    expiryDateError.classList.remove('hidden');
+                } else {
+                    expiryDateError.classList.add('hidden');
+                }
+                return isValid;
+            }
+
+            cvvInput.addEventListener('input', (event) => {
+                let value = event.target.value.replace(/\D/g, '');
+                value = value.substring(0, 3);
+                event.target.value = value;
+
+                if (value.length !== 3) {
+                    cvvError.classList.remove('hidden');
+                } else {
+                    cvvError.classList.add('hidden');
+                }
+            });
+
+            cvvInput.setAttribute('type', 'password');
+
+
+            paymentForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+
+                const isCardNumberValid = cardNumberInput.value.replace(/\s/g, '').length === 16;
+                const isExpiryValid = validateExpiryDate();
+                const isCvvValid = cvvInput.value.length === 3;
+
+                if (!isCardNumberValid) cardNumberError.classList.remove('hidden'); else cardNumberError.classList.add('hidden');
+                if (!isExpiryValid) expiryDateError.classList.remove('hidden'); else expiryDateError.classList.add('hidden');
+                if (!isCvvValid) cvvError.classList.remove('hidden'); else cvvError.classList.add('hidden');
+
+                if (isCardNumberValid && isExpiryValid && isCvvValid) {
+                    console.log("Processing payment...");
+                    setTimeout(() => {
+                        const orderItems = cart.map(item => ({
+                            id: item.id,
+                            name: item.name,
+                            price: item.price,
+                            image: item.image,
+                            quantity: item.quantity
+                        }));
+                        const orderSubtotal = parseFloat(cartSubtotalDisplay.textContent.replace('₹', ''));
+                        const orderShipping = parseFloat(cartShippingDisplay.textContent.replace('₹', ''));
+                        const orderTotal = parseFloat(cartTotalDisplay.textContent.replace('₹', ''));
+
+                        const newOrder = {
+                            id: `order-${Date.now()}`,
+                            timestamp: new Date().toISOString(),
+                            items: orderItems,
+                            subtotal: orderSubtotal,
+                            shipping: orderShipping,
+                            total: orderTotal
+                        };
+
+                        let existingOrders = JSON.parse(sessionStorage.getItem('userOrders')) || [];
+                        existingOrders.push(newOrder);
+                        sessionStorage.setItem('userOrders', JSON.stringify(existingOrders));
+
+                        paymentArea.classList.add('hidden');
+                        paymentConfirmedModal.classList.remove('hidden');
+                        cart = [];
+                        renderCartItems();
+                    }, 1500);
+                } else {
+                    console.log("Payment form has errors. Please correct them.");
+                }
+            });
+
+            closeModalButton.addEventListener('click', () => {
+                paymentConfirmedModal.classList.add('hidden');
+                cartItemsContainer.classList.remove('hidden');
+                addSampleProductBtn.classList.remove('hidden');
+                document.querySelector('.cart-summary').classList.remove('hidden');
+                renderCartItems();
+            });
+
+            viewOrdersBtn.addEventListener('click', () => {
+                paymentConfirmedModal.classList.add('hidden');
+                cartItemsContainer.classList.remove('hidden');
+                addSampleProductBtn.classList.remove('hidden');
+                document.querySelector('.cart-summary').classList.remove('hidden');
+                renderCartItems();
+            });
+
+            window.addEventListener('resize', updateCartTotals);
+            renderCartItems();
+        });
+    </script>
+</body>
+</html>

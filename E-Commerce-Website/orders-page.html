@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders</title>
+        <link rel="icon" type="image/x-icon" href="images/homepage/websiteicon.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f3f4f6;
+            color: #374151;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            box-sizing: border-box;
+            background-image: url("images/homepage/bg1.png");
+            background-repeat: repeat;
+        }
+        * {
+            border-radius: 0.5rem;
+        }
+        
+footer {
+    height: 10em;
+    width: 100%;
+    background-color: #b40000;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 1em 0;
+}
+
+.footer-section-1, .footer-section-2, .footer-section-3 {
+    height: 5em;
+    width: 25%;
+    min-width: 200px;
+    padding: 0em;
+}
+
+.footer-section-1 {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.phone-area, .email-area, .location-area {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0em;
+    color: white;
+    margin-bottom: 0em;
+}
+
+.footer-section-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profiles {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2em;
+}
+
+.profile-icons {
+    font-size: 2em;
+    transition: transform 0.2s ease;
+}
+.profile-icons:hover {
+    transform: scale(1.1);
+    color: #f1f1f1;
+}
+
+.footer-section-3 {
+}
+
+@media (max-width:765px) {
+    footer {
+            flex-direction: column;
+            height: auto;
+            padding: 1em 0;
+        }
+        .footer-section-1, .footer-section-2, .footer-section-3 {
+            width: 90%;
+            min-width: unset;
+            margin-top: 1em;
+            margin-bottom: 1em;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .phone-area, .email-area, .location-area {
+            justify-content: center;
+        }
+    .profiles {
+        justify-content: center;
+    }
+}
+
+a, a.visited{
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.back-button{
+    font-size: 1.3em;
+    padding-left: 5%;
+    position:  absolute;
+    font-weight: bold;
+}
+
+header {
+    width: 100%;
+    height: 4em;
+    background-color: #FF0000;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    position: sticky;
+    top: 0px;
+    z-index: 50;
+}
+        .main-content {
+            flex-grow: 1;
+            width: 100%;
+            max-width: 960px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 1.5rem;
+            box-sizing: border-box;
+        }
+        .page-title {
+            font-size: 2.25rem;
+            font-weight: 800;
+            color: #d33939;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .orders-container {
+            background-color: #ffffff;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .empty-orders-message {
+            text-align: center;
+            color: #6b7280;
+            padding: 2rem;
+            font-size: 1.125rem;
+        }
+        .order-card {
+            background-color: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        }
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px dashed #d1d5db;
+        }
+        .order-id {
+            font-weight: bold;
+            color: #111827;
+        }
+        .order-date {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+        .order-items-list {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+        .order-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            background-color: #ffffff;
+            padding: 0.75rem;
+            border-radius: 0.375rem;
+            border: 1px solid #f3f4f6;
+        }
+        .order-item-image {
+            width: 3rem;
+            height: 3rem;
+            object-fit: cover;
+            border-radius: 0.25rem;
+            margin-right: 0.75rem;
+        }
+        .order-item-info {
+            flex-grow: 1;
+        }
+        .order-item-name {
+            font-weight: 500;
+            color: #111827;
+            font-size: 0.95rem;
+        }
+        .order-item-quantity-price {
+            font-size: 0.85rem;
+            color: #4b5563;
+        }
+        .order-summary-footer {
+            display: flex;
+            justify-content: flex-end;
+            flex-direction: column;
+            align-items: flex-end;
+            border-top: 1px dashed #d1d5db;
+            padding-top: 1rem;
+            margin-top: 1rem;
+        }
+        .order-total-row {
+            font-size: 1.125rem;
+            font-weight: bold;
+            color: #2563eb;
+            margin-top: 0.5rem;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+    <header>
+        <div class="back-button"><a href="profilepage.html" onclick="navigateToImmersive('shopping-cart-app');"><p><i class="fa-solid fa-arrow-left" style="color: #ffffff;"></i>  Back To Profile Page</p></a></div>
+    </header>
+
+    <main class="main-content">
+        <h1 class="page-title">My Orders</h1>
+
+        <div id="orders-container" class="orders-container">
+            <div id="empty-orders-message" class="empty-orders-message hidden">
+                You haven't placed any orders yet.
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-section-1">
+            <div class="phone-area">
+                <div class="phone-logo"><i class="fa-solid fa-phone" style="color: white;"></i></div>
+                <div class="phone-no"><p>- (+91) 999-000-1111</p></div>
+            </div>
+            <div class="email-area">
+                <div class="email-logo"><i class="fa-solid fa-envelope" style="color: white;"></i></div>
+                <div class="email"><p>- shalinidey87@gmail.com</p></div>
+            </div>
+            <div class="location-area">
+                <div class="location-logo"><i class="fa-solid fa-location-dot" style="color: white;"></i></div>
+                <div class="location"><p>- ABC Area, Kolkata, West Bengal - 700088</p></div>
+            </div>
+        </div>
+        <div class="footer-section-2">
+            <div class="profiles">
+                <i class="fa-brands fa-instagram profile-icons" style="color: white"></i>
+                <i class="fa-brands fa-facebook-f profile-icons" style="color: white"></i>
+                <i class="fa-brands fa-youtube profile-icons" style="color: white"></i>
+                <i class="fa-brands fa-snapchat profile-icons" style="color: white"></i>
+            </div>
+        </div>
+        <div class="footer-section-3">
+
+        </div>
+    </footer>
+
+    <script>
+        function navigateToImmersive(id) {
+            window.location.hash = id;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const ordersContainer = document.getElementById('orders-container');
+            const emptyOrdersMessage = document.getElementById('empty-orders-message');
+
+            function renderOrders() {
+                ordersContainer.querySelectorAll('.order-card').forEach(card => card.remove());
+
+                const orders = JSON.parse(sessionStorage.getItem('userOrders')) || [];
+
+                if (orders.length === 0) {
+                    emptyOrdersMessage.classList.remove('hidden');
+                } else {
+                    emptyOrdersMessage.classList.add('hidden');
+                    orders.forEach(order => {
+                        const orderCard = document.createElement('div');
+                        orderCard.classList.add('order-card');
+
+                        const orderDate = new Date(order.timestamp).toLocaleString();
+
+                        let itemsHtml = order.items.map(item => `
+                            <li class="order-item">
+                                <img src="${item.image}" alt="${item.name}" class="order-item-image">
+                                <div class="order-item-info">
+                                    <div class="order-item-name">${item.name}</div>
+                                    <div class="order-item-quantity-price">Quantity: ${item.quantity} | Price: ${item.price}</div>
+                                </div>
+                            </li>
+                        `).join('');
+
+                        orderCard.innerHTML = `
+                            <div class="order-header">
+                                <span class="order-id">Order ID: ${order.id}</span>
+                                <span class="order-date">${orderDate}</span>
+                            </div>
+                            <ul class="order-items-list">
+                                ${itemsHtml}
+                            </ul>
+                            <div class="order-summary-footer">
+                                <div class="summary-row">
+                                    <span class="summary-label">Subtotal:</span>
+                                    <span class="summary-value">₹${order.subtotal.toFixed(2)}</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span class="summary-label">Shipping:</span>
+                                    <span class="summary-value">₹${order.shipping.toFixed(2)}</span>
+                                </div>
+                                <div class="order-total-row">
+                                    Total: ₹${order.total.toFixed(2)}
+                                </div>
+                            </div>
+                        `;
+                        ordersContainer.appendChild(orderCard);
+                    });
+                }
+            }
+
+            renderOrders();
+        });
+    </script>
+</body>
+</html>

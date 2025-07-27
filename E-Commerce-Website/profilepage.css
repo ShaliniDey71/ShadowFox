@@ -1,0 +1,330 @@
+body {
+    background-color: #800000;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+a, a.visited {
+    text-decoration: none;
+    color: #ffdf00;
+}
+
+.back-button {
+    font-size: 1.3em;
+    padding-left: 1%;
+    position: absolute;
+    color: #ffdf00;
+}
+
+.section-1 {
+    height: 8em;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: top;
+    padding-top: 1em;
+}
+
+.logo-area {
+    background-image: url("images/profilepage/logo.png");
+    height: 7em;
+    width: 11em;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.section-2 {
+    background-color: #ffdf00;
+    height: 1px;
+    width: 100%;
+}
+
+.section-3 {
+    height: 3em;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffdf00;
+    font-size: 2em;
+    padding: 1em 0;
+}
+
+.section-4 {
+    height: 35em;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2%;
+    box-sizing: border-box;
+}
+
+.img-area{
+    height: 100%;
+    width: 50%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.bg-divs{
+    height: 100%;
+    width: 30%;
+    overflow: visible;
+}
+
+#bg-div-1{
+    background-color: rgb(231, 150, 0);
+    z-index: 3;
+}
+
+#bg-div-2{
+    background-color: antiquewhite;
+    z-index: 2;
+}
+
+#bg-div-3{
+    background-color: #006400;
+    z-index: 1;
+}
+
+.character-images{
+    height: 100%;
+    width: 16.8em;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: visible;
+}
+
+#img1{
+    background-image: url("images/profilepage/sharara.png");
+    z-index: 6;
+}
+
+#img2{
+    background-image: url("images/profilepage/burkha.png");
+    z-index: 5;
+}
+
+#img3{
+    background-image: url("images/profilepage/saree.png");
+    z-index: 4;
+}
+
+
+.nav-area {
+    height: 100%;
+    width: 48%;
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    flex-direction: column;
+    gap: 1em;
+    padding-left: 2%;
+    box-sizing: border-box;
+}
+
+.nav-bars {
+    background-color: #006400;
+    height: 12%;
+    width: 90%;
+    font-size: 1.5em;
+    padding-left: 1.5em;
+    display: flex;
+    align-items: center;
+    color: #ffdf00;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+footer {
+    margin-top: 3em;
+    height: 10em;
+    width: 100%;
+    background-color: #990000;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: white;
+    padding: 1em 0;
+    box-sizing: border-box;
+}
+
+.footer-section-1, .footer-section-2, .footer-section-3 {
+    height: 8em;
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.5em;
+    padding: 0 1%;
+    box-sizing: border-box;
+}
+
+.footer-section-1 {
+    align-items: flex-start;
+}
+
+.phone-area, .email-area, .location-area {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5em;
+    color: white;
+}
+
+.footer-section-2 {
+    align-items: center;
+}
+
+.profiles {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2em;
+}
+
+.profile-icons {
+    font-size: 2em;
+    color: #ffdf00;
+}
+
+@media (max-width: 1160px) {
+    #bg-div-1,
+    #bg-div-2 {
+        display: none;
+    }
+    
+    #bg-div-3 {
+        width: 50%;
+        height: 53vh;
+    }
+
+    .nav-area{
+        width: 80%;
+    }
+}
+
+@media (max-width: 768px) {
+    .back-button {
+        font-size: 1.1em;
+        padding-left: 2%;
+    }
+
+    .section-3 {
+        font-size: 1.5em;
+        padding: 0.8em 0;
+    }
+
+    .section-4 {
+        height: 20em;
+        padding: 0 4%;
+    }
+
+    .img-area {
+        width: 40%;
+        justify-content: baseline;
+    }
+
+    #bg-div-1,
+    #bg-div-2 {
+        display: none;
+    }
+    
+    #bg-div-3 {
+        width: 50%;
+        height: 100%;
+    }
+
+    .character-images{
+        height: 90%;
+        width: 12.8em;
+        background-position: right;
+        min-height: 20em;
+    }
+
+    .nav-area{
+        width: 60%;
+    }
+
+    .nav-area {
+        width: 58%;
+        padding-left: 3%;
+        gap: 0.8em;
+    }
+
+    .nav-bars {
+        font-size: 1.2em;
+        padding-left: 1em;
+        height: 15%;
+    }
+
+    footer {
+        flex-direction: column;
+        height: auto;
+        padding: 20px 0;
+        gap: 1em;
+    }
+
+    .footer-section-1,
+    .footer-section-2,
+    .footer-section-3 {
+        width: 90%;
+        align-items: center;
+        padding: 0;
+    }
+
+    .phone-area, .email-area, .location-area {
+        justify-content: center;
+        width: 100%;
+    }
+    
+}
+
+@media (max-width: 650px) {
+    .nav-bars{
+        font-size: 0.95em;
+    }
+}
+
+
+@media (max-width: 300px) {
+    
+    .back-button {
+        font-size: 1em;
+    }
+
+    .section-3 {
+        font-size: 1.2em;
+    }
+
+    .section-4 {
+        height: 20em;
+        padding: 0 2%;
+    }
+
+    .img-area {
+        width: 45%;
+    }
+
+    .nav-area {
+        width: 60%;
+        gap: 0.5em;
+        font-size: 0.93em;
+    }
+
+    .nav-bars {
+        font-size: 1em;
+        padding-left: 0.8em;
+        height: 18%;
+    }
+
+    .logo-area {
+        height: 6em;
+        width: 9em;
+    }
+}

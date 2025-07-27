@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Address Book</title>
+    <link rel="icon" type="image/x-icon" href="images/homepage/websiteicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="addressbook.css">
+</head>
+<body>
+    <header>
+        <div class="back-button"><a href="profilepage.html" onclick="navigateToImmersive('shopping-cart-app');"><p><i class="fa-solid fa-arrow-left" style="color: #ffffff;"></i> Back To Profile Page</p></a></div>
+    </header>
+    <div class="address-book-container">
+        <h1 class="address-book-header">
+            <i class="fas fa-address-book" style="color: #d33939;;"></i> My Address Book
+        </h1>
+        <section class="contacts-list-section">
+            <div class="contact-list" id="contactList">
+            </div>
+        </section>
+        <div class="form-actions" style="margin-bottom: 40px;">
+            <button type="button" class="add-contact-btn" id="showAddFormBtn">
+                <i class="fas fa-plus-circle"></i> Add New Address
+            </button>
+        </div>
+        <section class="add-contact-section" id="addContactForm">
+            <h3>Address Details</h3>
+            <form class="contact-form" id="contactForm">
+                <div class="form-group">
+                    <label for="fullName">Name</label>
+                    <input type="text" id="fullName" placeholder="Enter Receiver's Name" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" placeholder="Enter Receiver's Phone Number" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" id="address" placeholder="Enter Receiver's Address">
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="add-contact-btn" id="submitContactBtn">
+                        <i class="fas fa-plus-circle"></i> Add New Address
+                    </button>
+                </div>
+            </form>
+        </section>
+    </div>
+    <div class="modal-overlay" id="confirmationModal">
+        <div class="modal-content">
+            <h4>Are you sure you want to delete this contact?</h4>
+            <div class="modal-buttons">
+                <button class="modal-button confirm" id="confirmDeleteBtn">Yes, Delete</button>
+                <button class="modal-button cancel" id="cancelDeleteBtn">Cancel</button>
+            </div>
+        </div>
+    </div>
+<footer>
+        <div class="footer-section-1">
+            <div class="phone-area">
+                <div class="phone-logo"><i class="fa-solid fa-phone" style="color: white;"></i></div>
+                <div class="phone-no"><p>- (+91) 999-000-1111</p></div>
+            </div>
+            <div class="email-area">
+                <div class="email-logo"><i class="fa-solid fa-envelope" style="color: white;"></i></div>
+                <div class="email"><p>- shalinidey87@gmail.com</p></div>
+            </div>
+            <div class="location-area">
+                <div class="location-logo"><i class="fa-solid fa-location-dot" style="color: white;"></i></div>
+                <div class="location"><p>- ABC Area, Kolkata, West Bengal - 700088</p></div>
+            </div>
+        </div>
+        <div class="footer-section-2">
+            <div class="profiles">
+                <i class="fa-brands fa-instagram profile-icons" style="color: white"></i>
+                <i class="fa-brands fa-facebook-f profile-icons" style="color: white"></i>
+                <i class="fa-brands fa-youtube profile-icons" style="color: white"></i>
+                <i class="fa-brands fa-snapchat profile-icons" style="color: white"></i>
+            </div>
+        </div>
+        <div class="footer-section-3">
+        </div>
+    </footer>
+<script src="addressbook.js"></script>
+</body>
+</html>

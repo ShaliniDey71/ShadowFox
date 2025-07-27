@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+        <link rel="icon" type="image/x-icon" href="images/homepage/websiteicon.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+    <div class="main">
+        <div class="heading-area">
+            <div class="login-txt"><p>Login</p></div>
+        </div>
+
+        <form id="login-form">
+            <div class="details-area">
+                <div class="detail-section" id="username-area">
+                    <label for="username" class="username-txt">Email Address</label>
+                    <input type="email" class="input-box" id="username"
+                           pattern="[^@\s]+@[^@\s]+\.com$"
+                           title="Email must contain @ and end with .com"
+                           required>
+                </div>
+                <div class="detail-section" id="password-area">
+                    <label for="password" class="password-txt">Password</label>
+                    <input type="password" class="input-box" id="password" minlength="8" required>
+                </div>
+                <button type="submit" class="login-button">Login</button>
+            </div>
+        </form>
+        <div id="login-message" class="message"></div>
+
+        <div class="no-account">
+            <p>Don't have an account? <a href="register.html" onclick="navigateToImmersive('register-page');">Register</a></p>
+        </div>
+    </div>
+    <div class="back-button"><a href="homepage.html" onclick="navigateToImmersive('shopping-cart-app');"><p><i class="fa-solid fa-arrow-left" style="color: #291212;"></i>  Back To Home</p></a></div>
+
+    <script>
+        // The navigateToImmersive function can be simplified or removed if only redirecting to homepage.html
+        // For consistency with your original code, I'll keep it here, but direct window.location is also fine.
+        function navigateToImmersive(id) {
+            window.location.hash = id; // This navigates within the current page (e.g., #shopping-cart-app)
+                                       // For a full page redirect, we'll use window.location.href
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginForm = document.getElementById('login-form');
+            const loginMessage = document.getElementById('login-message');
+
+            function showMessage(message, type) {
+                loginMessage.textContent = message;
+                loginMessage.className = `message ${type}`;
+                loginMessage.classList.remove('hidden');
+                setTimeout(() => {
+                    loginMessage.classList.add('hidden');
+                }, 3000); // Hide after 3 seconds
+            }
+
+            loginForm.addEventListener('submit', (event) => {
+                event.preventDefault(); // Prevent default form submission
+
+                // Check HTML5 validity
+                if (!loginForm.checkValidity()) {
+                    // If form is not valid, browser will show default validation messages
+                    showMessage('Please fill in all fields correctly.', 'error');
+                    return; // Stop execution if validation fails
+                }
+
+                // Redirect to homepage.html after a short delay
+                setTimeout(() => {
+                    window.location.href = 'homepage.html'; // This performs the full page redirect
+                }, 500); // 1-second delay before redirecting
+            });
+        });
+    </script>
+</body>
+</html>
