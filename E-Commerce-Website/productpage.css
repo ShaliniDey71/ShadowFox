@@ -4,7 +4,6 @@ body {
     background-color: #f8f8f8;
 }
 
-/* Reusing Header Styles from homepage.css for consistency */
 header {
     width: 100%;
     height: 4em;
@@ -14,20 +13,19 @@ header {
     align-items: center;
     position: sticky;
     top: 0px;
-    z-index: 50; /* Ensure header is above other content if scrolling */
+    z-index: 50;
 }
 
-/* Product Details Page Specific Styles */
 main {
     padding: 20px;
-    min-height: 70vh; /* Ensure main content pushes footer down */
-    background-image: url("images/homepage/bg1.png"); /* Consistent background */
+    min-height: 70vh;
+    background-image: url("images/homepage/bg1.png");
     background-repeat: repeat;
 }
 
 .product-details-container {
     display: flex;
-    flex-wrap: wrap; /* Allows wrapping on smaller screens */
+    flex-wrap: wrap;
     gap: 30px;
     padding: 20px;
     background-color: white;
@@ -38,8 +36,8 @@ main {
 }
 
 .product-image-section {
-    flex: 1; /* Allows it to grow and shrink */
-    min-width: 300px; /* Minimum width before wrapping */
+    flex: 1;
+    min-width: 300px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -51,14 +49,14 @@ main {
 
 .product-image-section img {
     max-width: 100%;
-    max-height: 500px; /* Limit image height */
-    object-fit: contain; /* Ensures the whole image is visible */
+    max-height: 500px;
+    object-fit: contain;
     border-radius: 5px;
 }
 
 .product-info-section {
-    flex: 2; /* Allows it to take more space */
-    min-width: 350px; /* Minimum width before wrapping */
+    flex: 2;
+    min-width: 350px;
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -114,7 +112,7 @@ main {
     background-color: rgb(5, 170, 5);
     border-radius: 5px;
     color: rgb(255, 255, 255);
-    padding: 0 5px; /* Added padding for better appearance */
+    padding: 0 5px;
 }
 
 .review-number-area {
@@ -129,7 +127,8 @@ main {
     margin-bottom: 30px;
 }
 
-.add-to-cart-btn, .buy-now-btn {
+.add-to-cart-btn,
+.buy-now-btn {
     padding: 12px 25px;
     font-size: 1.1em;
     font-weight: bold;
@@ -143,7 +142,7 @@ main {
 }
 
 .add-to-cart-btn {
-    background-color: #FF8C00; /* Orange color */
+    background-color: #FF8C00;
     color: white;
 }
 
@@ -152,7 +151,7 @@ main {
 }
 
 .buy-now-btn {
-    background-color: #FF0000; /* Red color */
+    background-color: #FF0000;
     color: white;
 }
 
@@ -178,7 +177,6 @@ main {
     line-height: 1.6;
 }
 
-/* Reusing Footer Styles from homepage.css for consistency */
 footer {
     height: 10em;
     width: 100%;
@@ -187,20 +185,24 @@ footer {
     justify-content: space-around;
     align-items: center;
     color: white;
-    margin-top: 20px; /* Space above footer */
+    margin-top: 20px;
 }
 
-.footer-section-1, .footer-section-2, .footer-section-3 {
+.footer-section-1,
+.footer-section-2,
+.footer-section-3 {
     height: 8em;
     width: 25%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start; /* Align left */
+    align-items: flex-start;
     gap: 0.5em;
 }
 
-.phone-area, .email-area, .location-area {
+.phone-area,
+.email-area,
+.location-area {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -222,7 +224,6 @@ footer {
     font-size: 2em;
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
     .product-details-container {
         flex-direction: column;
@@ -230,9 +231,10 @@ footer {
         padding: 10px;
     }
 
-    .product-image-section, .product-info-section {
-        min-width: unset; /* Remove min-width for smaller screens */
-        width: 100%; /* Take full width */
+    .product-image-section,
+    .product-info-section {
+        min-width: unset;
+        width: 100%;
     }
 
     .product-image-section {
@@ -244,29 +246,34 @@ footer {
         gap: 10px;
     }
 
-    .add-to-cart-btn, .buy-now-btn {
-        width: 95%; /* Full width buttons */
+    .add-to-cart-btn,
+    .buy-now-btn {
+        width: 95%;
         justify-content: center;
     }
 
     header {
-        flex-wrap: wrap; /* Allow header items to wrap */
-        height: auto; /* Adjust height dynamically */
+        flex-wrap: wrap;
+        height: auto;
         padding: 10px 0;
     }
 
-    .website-logo, .search-bar, .header-logos {
-        width: auto; /* Allow elements to size naturally */
+    .website-logo,
+    .search-bar,
+    .header-logos {
+        width: auto;
         margin: 5px;
     }
 
     .search-bar {
-        width: 90%; /* Wider search bar on small screens */
-        order: 4; /* Push search bar to new line or below */
+        width: 90%;
+        order: 4;
     }
 
-    .footer-section-1, .footer-section-2, .footer-section-3 {
-        width: 90%; /* Full width for footer sections */
+    .footer-section-1,
+    .footer-section-2,
+    .footer-section-3 {
+        width: 90%;
         align-items: center;
     }
 
@@ -286,19 +293,18 @@ footer {
         font-size: 1.5em;
     }
 
-    .mrp, .discount {
+    .mrp,
+    .discount {
         font-size: 1em;
     }
 
-    .add-to-cart-btn, .buy-now-btn {
+    .add-to-cart-btn,
+    .buy-now-btn {
         font-size: 1em;
         padding: 10px 20px;
     }
 }
 
-/* ... (Your existing productpage.css code) ... */
-
-/* NEW: Styles for the Reviews Section */
 .customer-reviews-section {
     max-width: 1200px;
     margin: 40px auto;
@@ -342,7 +348,6 @@ footer {
     font-size: 1em;
 }
 
-/* Responsive adjustments for reviews */
 @media (max-width: 768px) {
     .customer-reviews-section {
         margin: 20px auto;
@@ -366,14 +371,15 @@ footer {
     }
 }
 
-a, a.visited{
+a,
+a.visited {
     text-decoration: none;
     color: #ffffff;
 }
 
-.back-button{
+.back-button {
     font-size: 1.3em;
     padding-left: 5%;
-    position:  absolute;
+    position: absolute;
     font-weight: bold;
 }

@@ -41,11 +41,8 @@
     <div class="back-button"><a href="homepage.html" onclick="navigateToImmersive('shopping-cart-app');"><p><i class="fa-solid fa-arrow-left" style="color: #291212;"></i>  Back To Home</p></a></div>
 
     <script>
-        // The navigateToImmersive function can be simplified or removed if only redirecting to homepage.html
-        // For consistency with your original code, I'll keep it here, but direct window.location is also fine.
         function navigateToImmersive(id) {
-            window.location.hash = id; // This navigates within the current page (e.g., #shopping-cart-app)
-                                       // For a full page redirect, we'll use window.location.href
+            window.location.hash = id;
         }
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -58,23 +55,20 @@
                 loginMessage.classList.remove('hidden');
                 setTimeout(() => {
                     loginMessage.classList.add('hidden');
-                }, 3000); // Hide after 3 seconds
+                }, 3000);
             }
 
             loginForm.addEventListener('submit', (event) => {
-                event.preventDefault(); // Prevent default form submission
+                event.preventDefault();
 
-                // Check HTML5 validity
                 if (!loginForm.checkValidity()) {
-                    // If form is not valid, browser will show default validation messages
                     showMessage('Please fill in all fields correctly.', 'error');
-                    return; // Stop execution if validation fails
+                    return;
                 }
 
-                // Redirect to homepage.html after a short delay
                 setTimeout(() => {
-                    window.location.href = 'homepage.html'; // This performs the full page redirect
-                }, 500); // 1-second delay before redirecting
+                    window.location.href = 'homepage.html';
+                }, 500);
             });
         });
     </script>
